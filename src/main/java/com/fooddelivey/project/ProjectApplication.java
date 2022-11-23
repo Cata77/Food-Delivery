@@ -12,5 +12,4 @@ public class ProjectApplication {
 		FoodDelivery foodDelivery = context.getBean(FoodDelivery.class);
 		foodDelivery.run();
 	}
-
 }

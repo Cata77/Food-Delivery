@@ -15,7 +15,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Food> foodList;
+    @Column(nullable = false)
     private int pieces;
     private LocalDateTime localDateTime;
     private double totalPrice;
