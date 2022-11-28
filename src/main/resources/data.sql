@@ -1,4 +1,4 @@
-INSERT INTO USERS(ID, EMAIL, PASSWORD, BALANCE, NAME) VALUES
+INSERT INTO USERS(ID, EMAIL, PASSWORD, BALANCE, USER_NAME) VALUES
 (1, 'admin', 'admin', 10000, 'quicklogin'),
 (2, 'test_user@epam.com', 'XpQC6C4bfqF4ds', 100, 'Test User'),
 (3, 'test_user1@epam.com', 'KMtEd2YQmM84EP', 0, 'Test User 1'),
@@ -21,13 +21,12 @@ INSERT INTO USERS(ID, EMAIL, PASSWORD, BALANCE, NAME) VALUES
 (20, 'test_user18@epam.com', 't8bkVh79CZ84EK', 96.14, 'Test User 18');
 
 INSERT INTO food(ID, CALORIES, CATEGORY, NAME, PRICE) VALUES
-(1, 558, 'MEAL', 'Gratar', 15),
+(1, 558, 'MEAL', 'Paste', 15),
 (2, 379, 'MEAL', 'Burger', 13),
-(3, 278, 'SNACK', 'Cipsuri', 10),
-(4, 162, 'SNACK', 'Doritos', 8),
-(5, 470, 'DESSERT', 'Prajitura', 13),
-(6, 370, 'DESSERT', 'Bomboane', 9);
-(7, 370, 'DESSERT', 'Baton', 5);
+(3, 278, 'SNACK', 'Nachos', 10),
+(4, 162, 'SNACK', 'Croissant', 8),
+(5, 470, 'DESSERT', 'Tiramisu', 13),
+(6, 370, 'DESSERT', 'Cheesecake', 9);
 
 --INSERT INTO _ORDER(ID, PRICE, TIMESTAMP_CREATED, CUSTOMER_ID) VALUES (1, 36, TIMESTAMP '2019-06-28 23:09:00', 20),
 --(2, 91, TIMESTAMP '2021-12-11 15:29:00', 10),
