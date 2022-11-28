@@ -26,6 +26,7 @@ public class FoodDelivery {
             adminService.showAdminInfo();
         else {
             clientView.showUserDetails(user);
+            clientView.showMenu();
         }
     }
 }

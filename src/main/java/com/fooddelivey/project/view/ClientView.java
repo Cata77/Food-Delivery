@@ -1,20 +1,22 @@
 package com.fooddelivey.project.view;
 
+import com.fooddelivey.project.model.Food;
 import com.fooddelivey.project.model.User;
-import com.fooddelivey.project.service.AdminService;
-import com.fooddelivey.project.service.UserService;
+import com.fooddelivey.project.service.FoodService;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.Scanner;
 
 @Component
 public class ClientView {
     private final Scanner scanner = new Scanner(System.in);
     private final User user;
+    private final FoodService foodService;
 
-    public ClientView(User user) {
+    public ClientView(User user, FoodService foodService) {
         this.user = user;
+        this.foodService = foodService;
     }
 
     public void printWelcomeMessage() {
@@ -30,6 +32,13 @@ public class ClientView {
     }
 
     public void showUserDetails(User user) {
-        System.out.println("Buna " + user.getUserName() + ", balanta ta este de " + user.getBalance() + " RON");
+        System.out.println("\nBuna " + user.getUserName() + ", balanta ta este de " + user.getBalance() + " RON\n");
+        System.out.println("Acesta este meniul restaurantului:");
+    }
+
+    public void showMenu() {
+        List<Food> foodList = foodService.getFoodList();
+        for (Food food : foodList)
+            System.out.println("- " + food.getName() + " " + food.getPrice() + " RON, " + food.getCategory() + " " + food.getCalories() + " calorii");
     }
 }
