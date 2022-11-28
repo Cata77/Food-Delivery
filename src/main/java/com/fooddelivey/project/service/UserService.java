@@ -9,20 +9,15 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final AdminService adminService;
 
-    public UserService(UserRepository userRepository, AdminService adminService) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.adminService = adminService;
     }
 
     public User authenticateUser(User user) {
-        Optional<User> optionalUser = userRepository.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
-        if (optionalUser.isPresent()) {
-            if (checkIfAdmin(user.getEmail(), user.getPassword()))
-                adminService.showAdminInfo();
-            return user;
-        }
+        User foundUser = userRepository.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
+        if (foundUser != null)
+            return foundUser;
         throw new IllegalArgumentException("User incorect!");
     }
 

@@ -18,14 +18,14 @@ public class ClientView {
     }
 
     public void printWelcomeMessage() {
-        System.out.println("Bine ati venit in aplicatia noastra! Va rugam sa va autentificati!");
+        System.out.println("Bine ati venit in aplicatia noastra! Va rugam sa va autentificati!\n");
     }
 
     public User readCredentials() {
         System.out.println("Adresa de email:");
-        user.setEmail(scanner.nextLine());
+        this.user.setEmail(scanner.nextLine());
         System.out.println("Parola: ");
-        user.setPassword(scanner.nextLine());
+        this.user.setPassword(scanner.nextLine());
         return user;
     }
 

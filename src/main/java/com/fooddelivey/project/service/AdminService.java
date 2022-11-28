@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
     public void showAdminInfo() {
-
+        System.out.println("Buna admine!");
     }
 }
