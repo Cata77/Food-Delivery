@@ -27,6 +27,8 @@ public class FoodDelivery {
         else {
             clientView.showUserDetails(user);
             clientView.showMenu();
+            clientView.selectFood();
+            clientView.readPieces();
         }
     }
 }

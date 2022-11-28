@@ -6,6 +6,7 @@ import com.fooddelivey.project.service.FoodService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 @Component
@@ -40,5 +41,27 @@ public class ClientView {
         List<Food> foodList = foodService.getFoodList();
         for (Food food : foodList)
             System.out.println("- " + food.getName() + " " + food.getPrice() + " RON, " + food.getCategory() + " " + food.getCalories() + " calorii");
+    }
+
+    public Food selectFood() {
+        List<Food> foodList = foodService.getFoodList();
+        while (true) {
+            System.out.println("\nIntrodu numele mancarii pe care ai dori sa o comanzi:");
+            String foodName = scanner.nextLine();
+            Optional<Food> food = foodList.stream().filter(f -> f.getName().equalsIgnoreCase(foodName)).findFirst();
+            if (food.isPresent())
+                return food.get();
+            System.out.println("Nume gresit! Te rog reintrodu numele cu atentie!");
+        }
+    }
+
+    public int readPieces() {
+        while (true) {
+            System.out.println("\nCate bucati doriti sa comandati? Acest input suprascrie vechea valoare din cart, introducand zero sterge mancarea dorita:");
+            int pieces = Integer.parseInt(scanner.nextLine());
+            if (pieces > 0)
+                return pieces;
+            System.out.println("Ai introdus un numar negativ!");
+        }
     }
 }

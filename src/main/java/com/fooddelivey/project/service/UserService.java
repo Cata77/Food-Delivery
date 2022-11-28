@@ -15,9 +15,9 @@ public class UserService {
     }
 
     public User authenticateUser(User user) {
-        User foundUser = userRepository.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
-        if (foundUser != null)
-            return foundUser;
+        Optional<User> foundUser = userRepository.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
+        if (foundUser.isPresent())
+            return foundUser.get();
         throw new IllegalArgumentException("User incorect!");
     }
 
