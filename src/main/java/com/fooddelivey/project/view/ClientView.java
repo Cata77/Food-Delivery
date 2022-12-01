@@ -61,19 +61,28 @@ public class ClientView {
         while (true) {
             System.out.println("\nCate bucati doriti sa comandati? Acest input suprascrie vechea valoare din cart, introducand zero sterge mancarea dorita:");
             int pieces = Integer.parseInt(scanner.nextLine());
-            if (pieces > 0)
+            if (pieces >= 0)
                 return pieces;
             System.out.println("Ai introdus un numar negativ!");
         }
     }
 
-    public void showCartDetails(Order order) {
+    public void showLastItemAdded(Order order) {
         List<OrderItem> orderItems = order.getOrderItemList();
         System.out.println("Au fost adaugate " + orderItems.get(orderItems.size()-1).getPieces() + " bucati" +
-                "de " + orderItems.get(orderItems.size()-1).getFood().getName() + " comenzii tale!");
+                " de " + orderItems.get(orderItems.size()-1).getFood().getName() + " comenzii tale!");
+    }
+
+    public void showCartDetails(Order order) {
+        List<OrderItem> orderItems = order.getOrderItemList();
         System.out.println("Comanda ta este in valoare de " + order.getTotalPrice() + " RON: ");
         for (OrderItem orderItem : orderItems)
-            System.out.println(orderItem.getFood().getName() + " " + orderItem.getPieces() + "  bucati, " +
+            System.out.println(orderItem.getFood().getName() + " " + orderItem.getPieces() + " bucati, " +
                     orderItem.getPrice() + " RON total");
+    }
+
+    public String askClientToContinue() {
+        System.out.println("\nDoresti sa mai comanzi in continuare? (y/n): ");
+        return scanner.nextLine();
     }
 }
