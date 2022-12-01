@@ -16,21 +16,19 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Food> foodList;
-    @Column(nullable = false)
-    private int pieces;
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private List<OrderItem> orderItemList;
     private LocalDateTime localDateTime;
     private double totalPrice;
 
     public Order() {
     }
 
-    public Order(Integer id, List<Food> foodList, int pieces, LocalDateTime localDateTime, double totalPrice) {
+    public Order(Integer id, List<OrderItem> orderItemList, LocalDateTime localDateTime) {
         this.id = id;
-        this.foodList = foodList;
-        this.pieces = pieces;
+        this.orderItemList = orderItemList;
         this.localDateTime = localDateTime;
-        this.totalPrice = totalPrice;
+        this.totalPrice = 0;
     }
 
     public Integer getId() {
@@ -41,20 +39,12 @@ public class Order {
         this.id = id;
     }
 
-    public List<Food> getFoodList() {
-        return foodList;
+    public List<OrderItem> getOrderItemList() {
+        return orderItemList;
     }
 
-    public void setFoodList(List<Food> foodList) {
-        this.foodList = foodList;
-    }
-
-    public int getPieces() {
-        return pieces;
-    }
-
-    public void setPieces(int pieces) {
-        this.pieces = pieces;
+    public void setOrderItemList(List<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -78,20 +68,19 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return pieces == order.pieces && Double.compare(order.totalPrice, totalPrice) == 0 && Objects.equals(id, order.id) && Objects.equals(foodList, order.foodList) && Objects.equals(localDateTime, order.localDateTime);
+        return Double.compare(order.totalPrice, totalPrice) == 0 && Objects.equals(id, order.id) && Objects.equals(orderItemList, order.orderItemList) && Objects.equals(localDateTime, order.localDateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, foodList, pieces, localDateTime, totalPrice);
+        return Objects.hash(id, orderItemList, localDateTime, totalPrice);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", foodList=" + foodList +
-                ", pieces=" + pieces +
+                ", orderItemList=" + orderItemList +
                 ", localDateTime=" + localDateTime +
                 ", totalPrice=" + totalPrice +
                 '}';

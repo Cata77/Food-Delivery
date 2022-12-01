@@ -1,6 +1,8 @@
 package com.fooddelivey.project.view;
 
 import com.fooddelivey.project.model.Food;
+import com.fooddelivey.project.model.Order;
+import com.fooddelivey.project.model.OrderItem;
 import com.fooddelivey.project.model.User;
 import com.fooddelivey.project.service.FoodService;
 import org.springframework.stereotype.Component;
@@ -63,5 +65,15 @@ public class ClientView {
                 return pieces;
             System.out.println("Ai introdus un numar negativ!");
         }
+    }
+
+    public void showCartDetails(Order order) {
+        List<OrderItem> orderItems = order.getOrderItemList();
+        System.out.println("Au fost adaugate " + orderItems.get(orderItems.size()-1).getPieces() + " bucati" +
+                "de " + orderItems.get(orderItems.size()-1).getFood().getName() + " comenzii tale!");
+        System.out.println("Comanda ta este in valoare de " + order.getTotalPrice() + " RON: ");
+        for (OrderItem orderItem : orderItems)
+            System.out.println(orderItem.getFood().getName() + " " + orderItem.getPieces() + "  bucati, " +
+                    orderItem.getPrice() + " RON total");
     }
 }
