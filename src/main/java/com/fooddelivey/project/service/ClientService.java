@@ -26,7 +26,7 @@ public class ClientService {
             createOrder();
             enoughFunds = orderService.checkBalance(user, order);
         }
-
+        orderService.submitOrder(user,order);
     }
 
     private void createOrder() {

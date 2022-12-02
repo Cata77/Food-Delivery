@@ -4,9 +4,12 @@ import com.fooddelivey.project.model.Food;
 import com.fooddelivey.project.model.Order;
 import com.fooddelivey.project.model.OrderItem;
 import com.fooddelivey.project.model.User;
+import com.fooddelivey.project.repository.OrderRepository;
+import com.fooddelivey.project.repository.UserRepository;
 import com.fooddelivey.project.view.ClientView;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,11 +18,15 @@ import java.util.Optional;
 public class OrderService {
     private final FoodService foodService;
     private final ClientView clientView;
+    private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
     private final List<OrderItem> orderItems = new ArrayList<>();
 
-    public OrderService(FoodService foodService, ClientView clientView) {
+    public OrderService(FoodService foodService, ClientView clientView, OrderRepository orderRepository, UserRepository userRepository) {
         this.foodService = foodService;
         this.clientView = clientView;
+        this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
     }
 
     public void updateOrder(Order order,Food food, int pieces) {
@@ -63,4 +70,11 @@ public class OrderService {
         return true;
     }
 
+    public void submitOrder(User user,Order order) {
+        order.setLocalDateTime(LocalDateTime.now());
+        orderRepository.save(order);
+        user.setBalance(user.getBalance()-order.getTotalPrice());
+        userRepository.save(user);
+        clientView.showCompleteOrder(order);
+    }
 }

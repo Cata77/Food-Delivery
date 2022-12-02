@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 @Component
 public class ClientView {
@@ -84,5 +85,13 @@ public class ClientView {
     public String askClientToContinue() {
         System.out.println("\nDoresti sa mai comanzi in continuare? (y/n): ");
         return scanner.nextLine();
+    }
+
+    public void showCompleteOrder(Order order) {
+        List<OrderItem> orderItems = order.getOrderItemList();
+        StringJoiner joiner = new StringJoiner(",");
+        orderItems.forEach(item -> joiner.add(item.getFood().getName()));
+        System.out.print("\nComanda (mancare: [" + joiner + "], pret: " +  order.getTotalPrice() + " RON, data: " +
+                order.getLocalDateTime() + ") a fost comfirmata. Va multumim!");
     }
 }
