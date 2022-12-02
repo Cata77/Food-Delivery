@@ -3,6 +3,7 @@ package com.fooddelivey.project.service;
 import com.fooddelivey.project.model.Food;
 import com.fooddelivey.project.model.Order;
 import com.fooddelivey.project.model.OrderItem;
+import com.fooddelivey.project.model.User;
 import com.fooddelivey.project.view.ClientView;
 import org.springframework.stereotype.Service;
 
@@ -52,4 +53,14 @@ public class OrderService {
             order.setOrderItemList(orderItems);
         }
     }
+
+    public boolean checkBalance(User user, Order order) {
+        if (order.getTotalPrice() >= user.getBalance()) {
+            System.out.println("\nNu ai suficienti bani, balanta ta este de doar " + user.getBalance() +
+                    " RON. Te rog modifica comada petru a corespunde bugetului tau!");
+            return false;
+        }
+        return true;
+    }
+
 }

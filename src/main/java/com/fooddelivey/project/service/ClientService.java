@@ -21,7 +21,15 @@ public class ClientService {
 
     public void showClientInfo(User user) {
         clientView.showUserDetails(user);
+        boolean enoughFunds = false;
+        while (!enoughFunds) {
+            createOrder();
+            enoughFunds = orderService.checkBalance(user, order);
+        }
 
+    }
+
+    private void createOrder() {
         String response = "y";
         while (response.equals("y")) {
             clientView.showMenu();
