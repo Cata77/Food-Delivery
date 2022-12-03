@@ -45,7 +45,7 @@ public class OrderService {
             foodIsAlreadyPresent.get().setPieces(pieces);
             foodIsAlreadyPresent.get().setPrice(price);
         } else {
-            createNewOrder(food, pieces, price);
+            createNewOrderItem(food, pieces, price);
             newOrderCreated = true;
         }
         order.setTotalPrice(calculateTotalPrice());
@@ -55,7 +55,7 @@ public class OrderService {
         else clientView.showModifiedChange();
     }
 
-    private void createNewOrder(Food food, int pieces, int price) {
+    private void createNewOrderItem(Food food, int pieces, int price) {
         OrderItem orderItem = new OrderItem();
         orderItem.setFood(food);
         orderItem.setPieces(pieces);
