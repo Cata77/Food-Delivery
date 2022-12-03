@@ -29,27 +29,45 @@ public class OrderService {
         this.userRepository = userRepository;
     }
 
-    public void updateOrder(Order order,Food food, int pieces) {
+    public void initializeOrder(Order order, Food food, int pieces) {
         if (pieces == 0)
-            removeFoodIfPresent(order,food);
+            removeFood(order,food);
         else {
-            addItemToOrder(order, food, pieces);
+            orderCreation(order, food, pieces);
         }
     }
 
-    private void addItemToOrder(Order order, Food food, int pieces) {
+    private void orderCreation(Order order, Food food, int pieces) {
         int price = foodService.getFoodPriceMap().get(food.getName()) * pieces;
+        Optional<OrderItem> foodIsAlreadyPresent = checkIfFoodIsAlreadyPresent(food);
+        boolean newOrderCreated = false;
+        if (foodIsAlreadyPresent.isPresent()){
+            foodIsAlreadyPresent.get().setPieces(pieces);
+            foodIsAlreadyPresent.get().setPrice(price);
+        } else {
+            createNewOrder(food, pieces, price);
+            newOrderCreated = true;
+        }
+        order.setTotalPrice(calculateTotalPrice());
+        order.setOrderItemList(orderItems);
+        if (newOrderCreated)
+            clientView.showLastItemAdded(order);
+        else clientView.showModifiedChange();
+    }
+
+    private void createNewOrder(Food food, int pieces, int price) {
         OrderItem orderItem = new OrderItem();
         orderItem.setFood(food);
         orderItem.setPieces(pieces);
         orderItem.setPrice(price);
         orderItems.add(orderItem);
-        order.setTotalPrice(order.getTotalPrice() + price);
-        order.setOrderItemList(orderItems);
-        clientView.showLastItemAdded(order);
     }
 
-    public void removeFoodIfPresent(Order order, Food food) {
+    public Optional<OrderItem> checkIfFoodIsAlreadyPresent(Food food) {
+        return orderItems.stream().filter(orderItem -> orderItem.getFood().equals(food)).findFirst();
+    }
+
+    public void removeFood(Order order, Food food) {
         Optional<OrderItem> foodToRemove = orderItems.stream().filter(orderItem -> orderItem.getFood().equals(food)).findFirst();
         if (foodToRemove.isEmpty())
             System.out.println("Nu ati comandat o astfel de mancare!");
@@ -68,6 +86,10 @@ public class OrderService {
             return false;
         }
         return true;
+    }
+
+    public double calculateTotalPrice() {
+        return orderItems.stream().map(OrderItem::getPrice).reduce(0.0,Double::sum);
     }
 
     public void submitOrder(User user,Order order) {

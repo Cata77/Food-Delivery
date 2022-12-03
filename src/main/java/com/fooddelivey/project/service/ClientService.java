@@ -35,7 +35,7 @@ public class ClientService {
             clientView.showMenu();
             Food food = clientView.selectFood();
             int pieces = clientView.readPieces();
-            orderService.updateOrder(order, food, pieces);
+            orderService.initializeOrder(order, food, pieces);
             clientView.showCartDetails(order);
             response = clientView.askClientToContinue();
         }

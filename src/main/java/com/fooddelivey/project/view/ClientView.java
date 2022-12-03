@@ -74,6 +74,10 @@ public class ClientView {
                 " de " + orderItems.get(orderItems.size()-1).getFood().getName() + " comenzii tale!");
     }
 
+    public void showModifiedChange() {
+        System.out.println("Comanda a fost modificata!");
+    }
+
     public void showCartDetails(Order order) {
         List<OrderItem> orderItems = order.getOrderItemList();
         System.out.println("Comanda ta este in valoare de " + order.getTotalPrice() + " RON: ");
