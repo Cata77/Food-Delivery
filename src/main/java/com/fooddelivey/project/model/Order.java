@@ -20,14 +20,16 @@ public class Order {
     private List<OrderItem> orderItemList;
     private LocalDateTime localDateTime;
     private double totalPrice;
+    private User user;
 
     public Order() {
     }
 
-    public Order(Integer id, List<OrderItem> orderItemList, LocalDateTime localDateTime) {
+    public Order(Integer id, List<OrderItem> orderItemList, LocalDateTime localDateTime, User user) {
         this.id = id;
         this.orderItemList = orderItemList;
         this.localDateTime = localDateTime;
+        this.user = user;
         this.totalPrice = 0;
     }
 
@@ -63,17 +65,25 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Double.compare(order.totalPrice, totalPrice) == 0 && Objects.equals(id, order.id) && Objects.equals(orderItemList, order.orderItemList) && Objects.equals(localDateTime, order.localDateTime);
+        return Double.compare(order.totalPrice, totalPrice) == 0 && Objects.equals(id, order.id) && Objects.equals(orderItemList, order.orderItemList) && Objects.equals(localDateTime, order.localDateTime) && Objects.equals(user, order.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, orderItemList, localDateTime, totalPrice);
+        return Objects.hash(id, orderItemList, localDateTime, totalPrice, user);
     }
 
     @Override
@@ -83,6 +93,7 @@ public class Order {
                 ", orderItemList=" + orderItemList +
                 ", localDateTime=" + localDateTime +
                 ", totalPrice=" + totalPrice +
+                ", user=" + user +
                 '}';
     }
 }
