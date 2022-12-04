@@ -1,5 +1,6 @@
 package com.fooddelivey.project.view;
 
+import com.fooddelivey.project.model.Food;
 import com.fooddelivey.project.model.Order;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,11 @@ public class AdminView {
     }
 
     public void showMostExpensiveOrder(Order order) {
-        System.out.println("\nCea mai scumpa comanda a fost #" + order.getId() +
+        System.out.println("\nCea mai scumpa comanda a este #" + order.getId() +
                 " cu un pret total de " + order.getTotalPrice() + " RON");
+    }
+
+    public void showMostOrderedFood(Food food) {
+        System.out.println("Cea mai populara mancare: " + food.getName());
     }
 }

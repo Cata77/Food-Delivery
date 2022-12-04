@@ -16,5 +16,6 @@ public class AdminService {
     public void showAdminInfo() {
         adminView.showAdminWelcomeMessage();
         adminView.showMostExpensiveOrder(dbService.findMostExpensiveOrder());
+        adminView.showMostOrderedFood(dbService.findMostExpensiveFood());
     }
 }
