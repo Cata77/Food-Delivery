@@ -2,6 +2,7 @@ package com.fooddelivey.project.view;
 
 import com.fooddelivey.project.model.Food;
 import com.fooddelivey.project.model.Order;
+import com.fooddelivey.project.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +19,11 @@ public class AdminView {
 
     public void showMostOrderedFood(Food food) {
         System.out.println("Cea mai populara mancare: " + food.getName());
+    }
+
+    public void showUserWhoOrderedMost(User user) {
+        System.out.println("Userul care a comandat cel mai mult este: " + user.getUserName() +
+                " [#" + user.getId() + "]");
     }
 
     public void showTotalIncome(double totalIncome) {

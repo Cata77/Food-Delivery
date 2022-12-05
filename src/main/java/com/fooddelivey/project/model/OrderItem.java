@@ -16,15 +16,18 @@ public class OrderItem {
     private Food food;
     private int pieces;
     private double price;
+    @ManyToOne
+    private Order order;
 
     public OrderItem() {
     }
 
-    public OrderItem(Integer id, Food food, int pieces, double price) {
+    public OrderItem(Integer id, Food food, int pieces, double price, Order order) {
         this.id = id;
         this.food = food;
         this.pieces = pieces;
         this.price = price;
+        this.order = order;
     }
 
     public Integer getId() {
@@ -59,17 +62,25 @@ public class OrderItem {
         this.price = price;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderItem orderItem = (OrderItem) o;
-        return pieces == orderItem.pieces && Double.compare(orderItem.price, price) == 0 && Objects.equals(id, orderItem.id) && Objects.equals(food, orderItem.food);
+        return pieces == orderItem.pieces && Double.compare(orderItem.price, price) == 0 && Objects.equals(id, orderItem.id) && Objects.equals(food, orderItem.food) && Objects.equals(order, orderItem.order);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, food, pieces, price);
+        return Objects.hash(id, food, pieces, price, order);
     }
 
     @Override
@@ -79,6 +90,7 @@ public class OrderItem {
                 ", food=" + food +
                 ", pieces=" + pieces +
                 ", price=" + price +
+                ", order=" + order +
                 '}';
     }
 }

@@ -94,6 +94,7 @@ public class OrderService {
 
     public void submitOrder(User user,Order order) {
         order.setLocalDateTime(LocalDateTime.now());
+        order.setUser(user);
         orderRepository.save(order);
         user.setBalance(user.getBalance()-order.getTotalPrice());
         userRepository.save(user);
