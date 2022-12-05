@@ -30,4 +30,9 @@ public class DBService {
         orderItems.forEach(orderItem -> foodMap.put(orderItem.getFood(),orderItem.getPieces()));
         return Collections.max(foodMap.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
+
+    public double calculateTotalIncome() {
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream().map(Order::getTotalPrice).reduce(0.0,Double::sum);
+    }
 }

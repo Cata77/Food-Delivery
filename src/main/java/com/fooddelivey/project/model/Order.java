@@ -20,6 +20,7 @@ public class Order {
     private List<OrderItem> orderItemList;
     private LocalDateTime localDateTime;
     private double totalPrice;
+    @OneToOne
     private User user;
 
     public Order() {

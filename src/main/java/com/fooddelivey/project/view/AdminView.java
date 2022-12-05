@@ -19,4 +19,8 @@ public class AdminView {
     public void showMostOrderedFood(Food food) {
         System.out.println("Cea mai populara mancare: " + food.getName());
     }
+
+    public void showTotalIncome(double totalIncome) {
+        System.out.println("Venitul total este de " + totalIncome + " RON");
+    }
 }

@@ -17,5 +17,6 @@ public class AdminService {
         adminView.showAdminWelcomeMessage();
         adminView.showMostExpensiveOrder(dbService.findMostExpensiveOrder());
         adminView.showMostOrderedFood(dbService.findMostExpensiveFood());
+        adminView.showTotalIncome(dbService.calculateTotalIncome());
     }
 }
