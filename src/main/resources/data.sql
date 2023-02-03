@@ -21,7 +21,7 @@ INSERT INTO USERS(ID, EMAIL, PASSWORD, BALANCE, USER_NAME) VALUES
 (20, 'test_user18@uav.com', 't8bkVh79CZ84EK', 96.14, 'Test User 18');
 
 INSERT INTO food(ID, CALORIES, CATEGORY, NAME, PRICE) VALUES
-(1, 558, 'MEAL', 'Paste', 15),
+(1, 558, 'MEAL', 'Pasta', 15),
 (2, 379, 'MEAL', 'Burger', 13),
 (3, 278, 'SNACK', 'Nachos', 10),
 (4, 162, 'SNACK', 'Croissant', 8),
