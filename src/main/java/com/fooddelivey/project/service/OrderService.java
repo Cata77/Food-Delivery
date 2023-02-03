@@ -70,9 +70,9 @@ public class OrderService {
     public void removeFood(Order order, Food food) {
         Optional<OrderItem> foodToRemove = orderItems.stream().filter(orderItem -> orderItem.getFood().equals(food)).findFirst();
         if (foodToRemove.isEmpty())
-            System.out.println("Nu ati comandat o astfel de mancare!");
+            System.out.println("You have not ordered such a meal!");
         else {
-            System.out.println("Am eliminat mancarea selectata din comanda!");
+            System.out.println("We have removed the selected food from the order!");
             order.setTotalPrice(order.getTotalPrice()-foodToRemove.get().getPrice());
             orderItems.remove(foodToRemove.get());
             order.setOrderItemList(orderItems);
@@ -81,8 +81,8 @@ public class OrderService {
 
     public boolean checkBalance(User user, Order order) {
         if (order.getTotalPrice() >= user.getBalance()) {
-            System.out.println("\nNu ai suficienti bani, balanta ta este de doar " + user.getBalance() +
-                    " RON. Te rog modifica comada petru a corespunde bugetului tau!");
+            System.out.println("\nYou don't have enough money, your balance is " + user.getBalance() +
+                    " EUR. We do not empty your cart, please remove some of the items.");
             return false;
         }
         return true;

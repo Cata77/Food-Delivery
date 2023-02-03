@@ -9,24 +9,24 @@ import org.springframework.stereotype.Service;
 public class AdminView {
 
     public void showAdminWelcomeMessage() {
-        System.out.println("\nBine ai venit la panoul Admin Food Delivery Service!");
+        System.out.println("\nWelcome to the Admin Food Delivery Service board!");
     }
 
     public void showMostExpensiveOrder(Order order) {
-        System.out.println("\nCea mai scumpa comanda a este #" + order.getId() +
-                " cu un pret total de " + order.getTotalPrice() + " RON");
+        System.out.println("\nThe most expensive order is #" + order.getId() +
+                " with a total price of " + order.getTotalPrice() + " EUR");
     }
 
     public void showMostOrderedFood(Food food) {
-        System.out.println("Cea mai populara mancare: " + food.getName());
+        System.out.println("The most popular food: " + food.getName());
     }
 
     public void showUserWhoOrderedMost(User user) {
-        System.out.println("Userul care a comandat cel mai mult este: " + user.getUserName() +
+        System.out.println("User that ordered the most is: " + user.getUserName() +
                 " [#" + user.getId() + "]");
     }
 
     public void showTotalIncome(double totalIncome) {
-        System.out.println("Venitul total este de " + totalIncome + " RON");
+        System.out.println("The total income is " + totalIncome + " EUR");
     }
 }
